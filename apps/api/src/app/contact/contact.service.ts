@@ -1,6 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { CreateContactDto } from './dto/createContact.dto';
+import { CreateContactDto, UpdateContactDto } from './dto/contact.dto';
 
 @Injectable()
 export class ContactService {
@@ -22,5 +26,28 @@ export class ContactService {
     }
 
     return this.databaseService.contact.create({ data });
+  }
+
+  async getContactById(id: string) {
+    return this.databaseService.contact.findUnique({ where: { id } });
+  }
+
+  async updateContact(id: string, data: UpdateContactDto) {
+    const contact = await this.databaseService.contact.findUnique({
+      where: { id },
+    });
+    if (!contact) throw new NotFoundException('Contact not found!');
+
+    return this.databaseService.contact.update({
+      where: { id: contact.id },
+      data,
+    });
+  }
+
+  async deleteContact(id: string) {
+    const contact = await this.databaseService.contact.findUnique({
+      where: { id },
+    });
+    if (contact) await this.databaseService.contact.delete({ where: { id } });
   }
 }

@@ -17,3 +17,21 @@ export class CreateContactDto {
   @IsNotEmpty()
   address: string;
 }
+
+export class UpdateContactDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsPhoneNumber()
+  @IsNotEmpty()
+  phoneNumber: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  address: string;
+}
