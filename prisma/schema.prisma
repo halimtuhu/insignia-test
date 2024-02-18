@@ -30,35 +30,25 @@ model User {
 }
 
 model Contact {
-  id           String        @id @default(uuid())
-  createdAt    DateTime?     @default(now()) @map("created_at")
-  updatedAt    DateTime?     @updatedAt @map("updated_at")
-  name         String
-  phoneNumber  String        @unique @map("phone_number")
-  email        String
-  address      String
-  contactLists ContactList[]
+  id          String         @id @default(uuid())
+  createdAt   DateTime?      @default(now()) @map("created_at")
+  updatedAt   DateTime?      @updatedAt @map("updated_at")
+  name        String
+  phoneNumber String         @unique @map("phone_number")
+  email       String
+  address     String
+  groups      ContactGroup[] @relation(name: "contact_lists")
 
   @@map("contacts")
 }
 
 model ContactGroup {
-  id           String        @id @default(uuid())
-  createdAt    DateTime?     @default(now()) @map("created_at")
-  updatedAt    DateTime?     @updatedAt @map("updated_at")
-  name         String
-  description  String
-  contactLists ContactList[]
+  id          String    @id @default(uuid())
+  createdAt   DateTime? @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  name        String
+  description String
+  contacts    Contact[] @relation(name: "contact_lists")
 
   @@map("contact_groups")
-}
-
-model ContactList {
-  id             String       @id @default(uuid())
-  contactGroupId String       @map("contact_group_id")
-  contactId      String       @map("contact_id")
-  contactGroup   ContactGroup @relation(fields: [contactGroupId], references: [id])
-  contact        Contact      @relation(fields: [contactId], references: [id])
-
-  @@map("contact_lists")
 }
