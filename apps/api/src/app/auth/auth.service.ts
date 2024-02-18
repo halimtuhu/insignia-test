@@ -15,16 +15,18 @@ export class AuthService {
     const user = await this.databaseService.user.findUnique({
       where: { email },
     });
-    if (!user)
-      throw new UnauthorizedException({
-        message: 'Seems like there is no user registered with that email yet.',
-      });
+    if (!user) {
+      throw new UnauthorizedException(
+        'Seems like there is no user registered with that email yet.'
+      );
+    }
 
     const verify = await compare(password, user.password);
-    if (!verify)
-      throw new UnauthorizedException({
-        message: 'Password or email did not match with our system.',
-      });
+    if (!verify) {
+      throw new UnauthorizedException(
+        'Password or email did not match with our system.'
+      );
+    }
 
     const payload = JwtTokenPayloadDTO.mapFromUser(user);
     return { token: this.jwtService.sign(payload) };

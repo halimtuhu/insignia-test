@@ -25,7 +25,7 @@ export class UserController {
   @Get('/:id')
   async getUser(@Param('id') id: string) {
     const user = await this.userService.getUser(id);
-    if (!user) throw new NotFoundException({ message: 'User not found!' });
+    if (!user) throw new NotFoundException('User not found!');
 
     return { message: 'success', data: user };
   }
@@ -33,7 +33,7 @@ export class UserController {
   @Put('/:id')
   async updateUser(@Param('id') id: string, @Body() data: UpdateUserDTO) {
     const user = await this.userService.getUser(id);
-    if (!user) throw new NotFoundException({ message: 'User not found!' });
+    if (!user) throw new NotFoundException('User not found!');
 
     return {
       message: 'success',

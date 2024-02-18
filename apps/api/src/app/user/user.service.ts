@@ -31,9 +31,7 @@ export class UserService {
     });
 
     if (existingUser) {
-      throw new BadRequestException({
-        message: 'User with those email exists!',
-      });
+      throw new BadRequestException('User with those email exists!');
     }
 
     return await this.databaseService.user.create({

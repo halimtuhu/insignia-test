@@ -25,7 +25,9 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
 
-    if (!token) throw new UnauthorizedException();
+    if (!token) {
+      throw new UnauthorizedException('Your request is unauthorized!');
+    }
 
     try {
       const payload = this.jwtService.verify<JwtTokenPayloadDTO>(token);
@@ -33,14 +35,16 @@ export class AuthGuard implements CanActivate {
         where: { id: payload.sub },
       });
       if (!user) {
-        throw new UnauthorizedException({
-          message: 'You are not authorized to access this resource!',
-        });
+        throw new UnauthorizedException(
+          'You are not authorized to access this resource!'
+        );
       }
 
       return true;
     } catch (error) {
-      if (error instanceof JsonWebTokenError) throw new UnauthorizedException();
+      if (error instanceof JsonWebTokenError) {
+        throw new UnauthorizedException('We can not proceed your request!');
+      }
 
       throw error;
     }
