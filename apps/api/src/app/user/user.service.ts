@@ -2,6 +2,18 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
 import { CreateUserDTO } from './dto/createUser.dto';
 import { hash } from 'bcrypt';
+import { UpdateUserDTO } from './dto/updateUser.dto';
+
+const defaultUserSelect = {
+  id: true,
+  name: true,
+  email: true,
+  role: true,
+  createdAt: true,
+  updatedAt: true,
+  emailVerifiedAt: true,
+  lastActivityAt: true,
+};
 
 @Injectable()
 export class UserService {
@@ -9,16 +21,7 @@ export class UserService {
 
   async getUsers() {
     return await this.databaseService.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-        emailVerifiedAt: true,
-        lastActivityAt: true,
-      },
+      select: defaultUserSelect,
     });
   }
 
@@ -40,32 +43,30 @@ export class UserService {
         role: data.role,
         password: await hash(data.password, 10),
       },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-        emailVerifiedAt: true,
-        lastActivityAt: true,
-      },
+      select: defaultUserSelect,
     });
   }
 
   async getUser(id: string) {
     return await this.databaseService.user.findFirst({
       where: { id },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-        emailVerifiedAt: true,
-        lastActivityAt: true,
-      },
+      select: defaultUserSelect,
     });
+  }
+
+  async updateUser(id: string, data: UpdateUserDTO) {
+    return await this.databaseService.user.update({
+      where: { id },
+      data: {
+        name: data.name,
+        email: data.email,
+        role: data.role,
+      },
+      select: defaultUserSelect,
+    });
+  }
+
+  async deleteUser(id: string) {
+    await this.databaseService.user.delete({ where: { id } });
   }
 }
