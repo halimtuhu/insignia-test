@@ -11,6 +11,7 @@ import {
 import { AuthGuard } from '../auth/auth.guard';
 import { UserService } from './user.service';
 import { UpdateUserDTO } from './dto/updateUser.dto';
+import { ApiResponse } from '../api/api.dto';
 
 @UseGuards(AuthGuard)
 @Controller('/users')
@@ -19,7 +20,7 @@ export class UserController {
 
   @Get('/')
   async getUsers() {
-    return { message: 'success', data: await this.userService.getUsers() };
+    return ApiResponse.success(await this.userService.getUsers());
   }
 
   @Get('/:id')
@@ -27,7 +28,7 @@ export class UserController {
     const user = await this.userService.getUser(id);
     if (!user) throw new NotFoundException('User not found!');
 
-    return { message: 'success', data: user };
+    return ApiResponse.success(user);
   }
 
   @Put('/:id')
@@ -35,10 +36,9 @@ export class UserController {
     const user = await this.userService.getUser(id);
     if (!user) throw new NotFoundException('User not found!');
 
-    return {
-      message: 'success',
-      data: await this.userService.updateUser(user.id, data),
-    };
+    return ApiResponse.success(
+      await this.userService.updateUser(user.id, data)
+    );
   }
 
   @Delete('/:id')
@@ -46,6 +46,6 @@ export class UserController {
     const user = await this.userService.getUser(id);
     if (user) await this.userService.deleteUser(id);
 
-    return { message: 'success' };
+    return ApiResponse.success();
   }
 }

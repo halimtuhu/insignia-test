@@ -3,6 +3,7 @@ import { SigninDTO } from './dto/signin.dto';
 import { AuthService } from './auth.service';
 import { CreateUserDTO } from '../user/dto/createUser.dto';
 import { UserService } from '../user/user.service';
+import { ApiResponse } from '../api/api.dto';
 
 @Controller('/auth')
 export class AuthController {
@@ -13,15 +14,13 @@ export class AuthController {
 
   @Post('/signin')
   async signin(@Body() data: SigninDTO) {
-    const result = await this.authService.signin(data.email, data.password);
-    return { message: 'success', data: result };
+    return ApiResponse.success(
+      await this.authService.signin(data.email, data.password)
+    );
   }
 
   @Post('/signup')
   async signup(@Body() data: CreateUserDTO) {
-    return {
-      message: 'success',
-      data: await this.userService.createUser(data),
-    };
+    return ApiResponse.success(await this.userService.createUser(data));
   }
 }
