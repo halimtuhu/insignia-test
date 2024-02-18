@@ -1,0 +1,8 @@
+{
+  "name": "social-network",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/social-network",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
