@@ -11,8 +11,8 @@ datasource db {
 }
 
 enum Role {
-  ADMIN
-  USER
+  admin
+  user
 }
 
 model User {
@@ -24,7 +24,7 @@ model User {
   emailVerifiedAt DateTime? @map("email_verified_at")
   name            String
   password        String
-  role            Role      @default(USER)
+  role            Role      @default(user)
 
   @@map("users")
 }
