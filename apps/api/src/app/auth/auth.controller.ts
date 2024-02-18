@@ -12,11 +12,9 @@ export class AuthController {
   ) {}
 
   @Post('/signin')
-  signin(@Body() data: SigninDTO) {
-    return {
-      message: 'success',
-      data: this.authService.signin(data.email, data.password),
-    };
+  async signin(@Body() data: SigninDTO) {
+    const result = await this.authService.signin(data.email, data.password);
+    return { message: 'success', data: result };
   }
 
   @Post('/signup')

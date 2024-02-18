@@ -6,10 +6,15 @@ import {
 } from '@nestjs/common';
 import { JsonWebTokenError, JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { JwtTokenPayloadDTO } from './dto/jwt.dto';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private databaseService: DatabaseService
+  ) {}
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
@@ -23,8 +28,15 @@ export class AuthGuard implements CanActivate {
     if (!token) throw new UnauthorizedException();
 
     try {
-      const payload = this.jwtService.verify(token);
-      request['user'] = payload;
+      const payload = this.jwtService.verify<JwtTokenPayloadDTO>(token);
+      const user = await this.databaseService.user.findUnique({
+        where: { id: payload.sub },
+      });
+      if (!user) {
+        throw new UnauthorizedException({
+          message: 'You are not authorized to access this resource!',
+        });
+      }
 
       return true;
     } catch (error) {
