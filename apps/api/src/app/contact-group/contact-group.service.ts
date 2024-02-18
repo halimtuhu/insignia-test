@@ -63,4 +63,41 @@ export class ContactGroupService {
       await this.databaseService.contactGroup.delete({ where: { id } });
     }
   }
+
+  async addConctacts(groupId: string, contactIds: string[]) {
+    const contactGroup = await this.databaseService.contactGroup.findUnique({
+      where: { id: groupId },
+    });
+    if (!contactGroup) {
+      throw new NotFoundException('Contract group not found!');
+    }
+
+    const contacts = await this.databaseService.contact.findMany({
+      where: { id: { in: contactIds } },
+    });
+    if (contacts.length <= 0) {
+      throw new NotFoundException('Contacts not found!');
+    }
+
+    return await this.databaseService.contactGroup.update({
+      where: { id: contactGroup.id },
+      data: {
+        contacts: { connect: contacts.map((contact) => ({ id: contact.id })) },
+      },
+    });
+  }
+
+  async removeContacts(groupId: string, contactIds: string[]) {
+    const contactGroup = await this.databaseService.contactGroup.findUnique({
+      where: { id: groupId },
+    });
+    if (!contactGroup) {
+      throw new NotFoundException('Contract group not found!');
+    }
+
+    return await this.databaseService.contactGroup.update({
+      where: { id: groupId },
+      data: { contacts: { disconnect: contactIds.map((id) => ({ id })) } },
+    });
+  }
 }

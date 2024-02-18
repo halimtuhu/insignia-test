@@ -13,6 +13,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ApiResponse } from '../api/api.dto';
 import { ContactGroupService } from './contact-group.service';
 import {
+  ContactsToGroupDto,
   CreateContactGroupDto,
   UpdateContactGroupDto,
 } from './dto/contact-group.dto';
@@ -57,5 +58,25 @@ export class ContactGroupController {
   async deleteContactGroup(@Param('id') id: string) {
     await this.contactGroupService.deleteContactGroup(id);
     return ApiResponse.success();
+  }
+
+  @Post('/:id/contacts')
+  async addContactsToGroup(
+    @Param('id') id: string,
+    @Body() data: ContactsToGroupDto
+  ) {
+    return ApiResponse.success(
+      await this.contactGroupService.addConctacts(id, data.contactIds)
+    );
+  }
+
+  @Delete('/:id/contacts')
+  async removeContactsFromGroup(
+    @Param('id') id: string,
+    @Body() data: ContactsToGroupDto
+  ) {
+    return ApiResponse.success(
+      await this.contactGroupService.removeContacts(id, data.contactIds)
+    );
   }
 }

@@ -30,3 +30,10 @@ export class UpdateContactGroupDto {
   @IsNotEmpty()
   description: string;
 }
+
+export class ContactsToGroupDto {
+  @IsArray()
+  @ArrayNotEmpty()
+  @ArrayMinSize(1)
+  contactIds: string[];
+}
