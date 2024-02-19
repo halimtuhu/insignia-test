@@ -1,19 +1,19 @@
 import { SVGAttributes } from 'react';
 
-export function IconsX({ className, strokeWidth }: SVGAttributes<SVGElement>) {
+export function IconsLogOut({ className }: SVGAttributes<SVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={strokeWidth || 1.5}
+      strokeWidth={1.5}
       stroke="currentColor"
       className={className || 'h-5 w-5'}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M6 18 18 6M6 6l12 12"
+        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
       />
     </svg>
   );

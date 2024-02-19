@@ -24,16 +24,16 @@ export function Modal({ show, children, onClose }: ModalProps) {
     <Transition appear show={show} as={Fragment}>
       <div className="fixed inset-0 h-screen w-screen">
         <TransitionFade>
-          <div className="bg-primary/50 absolute inset-0 h-full w-full"></div>
+          <div className="bg-primary/75 absolute inset-0 h-full w-full"></div>
         </TransitionFade>
         <TransitionSlideUp>
-          <div className="relative flex flex-col items-center gap-4 p-4">
+          <div className="relative flex flex-col items-center gap-4 px-4 py-8">
             {children}
             <button
               onClick={onClose}
-              className="bg-accent text-primary flex h-8 w-8 items-center justify-center rounded-full shadow-md"
+              className="text-accent flex h-8 w-8 items-center justify-center rounded-full"
             >
-              <IconsX />
+              <IconsX strokeWidth={4} />
             </button>
           </div>
         </TransitionSlideUp>

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Modal } from './modal';
+import { IconsUpload } from './icons/icons-upload';
+import { IconsLogOut } from './icons/icons-log-out';
 
 type Props = {
   show: boolean;
@@ -15,7 +17,8 @@ export function ProfileMenu({ show, onClose }: Props) {
           <div className="border-b-primary/25 mx-4 flex flex-col items-center border-b pb-4">
             <h3 className="font-bold">User Name</h3>
             <div className="text-sm">Title</div>
-            <button className="bg-primary text-accent mt-4 w-full px-4 py-2">
+            <button className="bg-primary text-accent mt-4 flex w-full items-center justify-center gap-2 px-4 py-2">
+              <IconsUpload />
               <span>Start Upload</span>
             </button>
           </div>
@@ -39,7 +42,8 @@ export function ProfileMenu({ show, onClose }: Props) {
               Security
             </Link>
           </div>
-          <button className="bg-primary/5 text-primary border-t-primary/50 block w-full border-t py-4">
+          <button className="bg-primary/5 text-primary border-t-primary/50 flex w-full items-center justify-center gap-2 border-t py-4">
+            <IconsLogOut />
             <span>Log Out</span>
           </button>
         </div>
