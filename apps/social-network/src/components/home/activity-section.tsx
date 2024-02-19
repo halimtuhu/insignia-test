@@ -55,7 +55,7 @@ export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
         </Link>
       </div>
 
-      <div className="lg:border-b-accent lg:border-b lg:pb-2">
+      <div className="lg:border-b-accent space-y-2 md:space-y-0 lg:border-b lg:pb-2">
         {activities.map((activity, i) => (
           <div
             key={i}
