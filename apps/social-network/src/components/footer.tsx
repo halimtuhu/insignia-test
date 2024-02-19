@@ -6,7 +6,7 @@ import { IconsTwitter } from './icons/icons-twitter';
 export function Footer() {
   return (
     <footer className="border-t-accent mx-4 border-t py-4">
-      <div className="mb-4 flex items-center justify-center gap-4">
+      <div className="mb-4 flex items-center justify-center gap-4 md:justify-start">
         <Link
           href="#"
           className="bg-accent text-primary flex h-6 w-6 items-center justify-center rounded-sm"
@@ -26,7 +26,7 @@ export function Footer() {
           <IconsLinkedin className="h-4 w-4" />
         </Link>
       </div>
-      <div className="mb-4 flex flex-wrap items-center justify-center gap-4 text-sm">
+      <div className="mb-4 flex flex-wrap items-center justify-center gap-4 text-sm md:justify-start">
         <Link href="#">About</Link>
         <Link href="#">For Business</Link>
         <Link href="#">Suggestions</Link>
@@ -34,10 +34,10 @@ export function Footer() {
         <Link href="#">Contact Us</Link>
         <Link href="#">Pricing</Link>
       </div>
-      <div className="mb-1 text-center text-xs">
+      <div className="mb-1 text-center text-xs md:text-left">
         © Copyright 2023 SocialNetwork Inc.
       </div>
-      <div className="flex items-center justify-center gap-4 text-xs">
+      <div className="flex items-center justify-center gap-4 text-xs md:justify-start">
         <Link href="#">Privacy</Link>
         <Link href="#">Terms</Link>
       </div>

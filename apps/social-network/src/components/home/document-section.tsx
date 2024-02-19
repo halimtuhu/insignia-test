@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { IconsArrow } from '../icons/icons-arrow';
+import { HTMLAttributes } from 'react';
+import { cn } from '../../helpers/class-helper';
 
-export function DocumentSection() {
+export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className="mb-8 px-4">
+    <div className={cn('px-4', className)}>
       <div className="mb-3 flex items-center justify-between">
         <h3 className="font-semibold">Documents</h3>
         <Link href="#" className="flex items-center gap-2">

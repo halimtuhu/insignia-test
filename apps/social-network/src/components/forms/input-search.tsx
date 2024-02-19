@@ -1,8 +1,9 @@
+import { HTMLAttributes } from 'react';
 import { IconsSearch } from '../icons/icons-search';
 
-export function InputSearch() {
+export function InputSearch({ className }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className="relative">
+    <div className={className || 'relative'}>
       <input
         type="text"
         className="bg-accent placeholder:text-primary w-full rounded-sm p-2"
