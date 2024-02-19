@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { IconsArrow } from '../icons/icons-arrow';
 import { HTMLAttributes } from 'react';
 import { cn } from '../../helpers/class-helper';
-import { IconsCircleArrow } from '../icons/icons-circle-arrow';
+import { IconsCircleUser } from '../icons/icons-circle-user';
 
 export function PeopleSection({ className }: HTMLAttributes<HTMLDivElement>) {
   const peoples = [
@@ -29,12 +29,12 @@ export function PeopleSection({ className }: HTMLAttributes<HTMLDivElement>) {
             key={i}
             className="bg-accent text-primary flex aspect-[4/3] w-[45%] flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3 md:h-full md:w-full first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto"
           >
-            <h3 className="text-lg font-semibold">{people.name}</h3>
+            <h3 className="font-semibold md:text-lg">{people.name}</h3>
             <div className="text-sm">{people.title}</div>
           </div>
         ))}
         <button className="bg-primary text-accent border-accent hidden aspect-video h-full w-full flex-none items-center gap-2 rounded-sm border p-8 md:flex">
-          <IconsCircleArrow className="h-10 w-10" direction="up" />
+          <IconsCircleUser className="h-10 w-10" direction="up" />
           <div className="text-left">
             Show
             <br />

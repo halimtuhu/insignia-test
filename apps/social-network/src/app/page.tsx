@@ -30,8 +30,8 @@ export default async function Index() {
       <div className="mb-8 grid grid-cols-1 gap-8 lg:mb-24 lg:grid-cols-3">
         <VideoSection className="lg:col-span-2 lg:p-0" />
         <ActivitySection className="lg:col-span-1 lg:p-0" />
-        <PeopleSection className="lg:col-span-2 lg:row-span-2 lg:p-0" />
-        <ChannelSection className="lg:col-span-1 lg:p-0" />
+        <PeopleSection className="lg:col-span-2 lg:p-0" />
+        <ChannelSection className="lg:col-span-1 lg:row-span-2 lg:p-0" />
         <DocumentSection className="lg:col-span-2 lg:p-0" />
       </div>
 

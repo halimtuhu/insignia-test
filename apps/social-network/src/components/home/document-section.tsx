@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { IconsArrow } from '../icons/icons-arrow';
 import { HTMLAttributes } from 'react';
 import { cn } from '../../helpers/class-helper';
-import { IconsCircleArrow } from '../icons/icons-circle-arrow';
+import { IconsCirclePlus } from '../icons/icons-circle-plus';
 
 export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
   const documents = [
@@ -36,7 +36,7 @@ export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
           </div>
         ))}
         <button className="bg-primary text-accent border-accent hidden aspect-video h-full w-full flex-none items-center gap-2 rounded-sm border p-8 md:flex">
-          <IconsCircleArrow className="h-10 w-10" direction="up" />
+          <IconsCirclePlus className="h-10 w-10" direction="up" />
           <div className="text-left">
             Share
             <br />

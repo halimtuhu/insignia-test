@@ -1,49 +1,66 @@
+'use client';
+
 import Link from 'next/link';
 import { IconsArrow } from '../icons/icons-arrow';
 import { IconsChatBubble } from '../icons/icons-chat-bubble';
 import { IconsX } from '../icons/icons-x';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
 import { cn } from '../../helpers/class-helper';
+import { matchViewport } from '../../helpers/common';
 
 export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
-  const activities = [
+  const [activities, setActivities] = useState<
     {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-    {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-    {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-    {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-    {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-    {
-      user: 'User Name',
-      status: 'commented',
-      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      timestamp: '5 minutes ago',
-    },
-  ];
+      user: string;
+      status: string;
+      content: string;
+      timestamp: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    const response = [
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+      {
+        user: 'User Name',
+        status: 'commented',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        timestamp: '5 minutes ago',
+      },
+    ];
+
+    if (matchViewport(1024)) setActivities(response.slice(0, 4));
+    else setActivities(response);
+  }, []);
 
   return (
     <div className={cn('px-4', className)}>
@@ -67,18 +84,16 @@ export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
           >
             <div className="bg-accent aspect-[6/5] w-full rounded-sm"></div>
             <div className="col-span-3">
-              <div className="flex items-center gap-1">
-                <span className="font-semibold">User Name</span>
-                <span className="text-sm italic">Commented</span>
+              <div className="flex items-baseline gap-1">
+                <span className="font-semibold">{activity.user}</span>
+                <span className="text-xs italic">{activity.status}</span>
               </div>
-              <div className="truncate">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id
-                ratione nostrum quasi, eligendi magnam voluptate dignissimos, ab
-                perferendis repellat architecto et blanditiis est, eveniet amet!
+              <div className="truncate text-sm md:text-base">
+                {activity.content}
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <IconsChatBubble className="h-4 w-4" />
-                <span>5 minutes ago</span>
+                <span>{activity.timestamp}</span>
               </div>
               <button className="text-primary absolute right-0 top-0 mr-1 mt-1">
                 <IconsX className="h-4 w-4" />

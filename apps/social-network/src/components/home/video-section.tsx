@@ -29,7 +29,7 @@ export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
             key={i}
             className="bg-accent text-primary flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3 md:aspect-[4/3] md:h-full md:w-full first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto"
           >
-            <h3 className="text-lg font-semibold">{video.title}</h3>
+            <h3 className="font-semibold md:text-lg">{video.title}</h3>
             <div className="text-sm">{video.author}</div>
             <div className="text-xs font-semibold">{video.views}</div>
           </div>
