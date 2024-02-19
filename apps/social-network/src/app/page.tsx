@@ -27,7 +27,7 @@ export default async function Index() {
         <Link href="#">Channels</Link>
       </div>
 
-      <div className="mb-8 grid grid-cols-1 gap-8 lg:mb-24 lg:grid-cols-3 lg:gap-6">
+      <div className="mb-8 grid grid-cols-1 gap-8 lg:mb-24 lg:grid-cols-3">
         <VideoSection className="lg:col-span-2 lg:p-0" />
         <ActivitySection className="lg:col-span-1 lg:p-0" />
         <PeopleSection className="lg:col-span-2 lg:row-span-2 lg:p-0" />

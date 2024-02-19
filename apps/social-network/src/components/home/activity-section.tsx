@@ -37,6 +37,12 @@ export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
       content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       timestamp: '5 minutes ago',
     },
+    {
+      user: 'User Name',
+      status: 'commented',
+      content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      timestamp: '5 minutes ago',
+    },
   ];
 
   return (

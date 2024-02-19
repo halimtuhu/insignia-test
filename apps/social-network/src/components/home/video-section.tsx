@@ -27,16 +27,20 @@ export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
         {videos.map((video, i) => (
           <div
             key={i}
-            className="bg-accent text-primary flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3 md:h-full md:w-full first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto"
+            className="bg-accent text-primary flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3 md:aspect-[4/3] md:h-full md:w-full first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto"
           >
             <h3 className="text-lg font-semibold">{video.title}</h3>
             <div className="text-sm">{video.author}</div>
             <div className="text-xs font-semibold">{video.views}</div>
           </div>
         ))}
-        <button className="bg-primary text-accent border-accent hidden aspect-video w-3/4 flex-none items-center justify-center gap-2 rounded-sm border p-3 md:flex md:h-full md:w-full">
-          <IconsCircleArrow className="h-6 w-6" direction="up" />
-          <span>Show Your Work</span>
+        <button className="bg-primary text-accent border-accent hidden aspect-video w-3/4 flex-none items-center gap-2 rounded-sm border p-8 md:flex md:h-full md:w-full">
+          <IconsCircleArrow className="h-10 w-10" direction="up" />
+          <div className="text-left">
+            Upload
+            <br />
+            Your Own Video
+          </div>
         </button>
       </div>
     </div>
