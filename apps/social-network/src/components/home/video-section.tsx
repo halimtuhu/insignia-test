@@ -7,6 +7,7 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 import { IconsCircleArrow } from '../icons/icons-circle-arrow';
 import { PostPreview } from '../../helpers/interfaces';
 import { api } from '../../helpers/api';
+import Image from 'next/image';
 
 export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
   const [videos, setVideos] = useState<PostPreview[]>([]);
@@ -33,13 +34,25 @@ export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
         {videos.map((video, i) => (
           <div
             key={i}
-            className="bg-accent text-primary flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3 md:aspect-[4/3] md:h-full md:w-full first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto"
+            className={cn(
+              'bg-accent text-primary relative flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-0.5 rounded-sm p-3',
+              'md:aspect-[4/3] md:h-full md:w-full',
+              'first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto'
+            )}
           >
-            <h3 className="font-semibold md:text-lg">{video.text}</h3>
-            <div className="text-sm">
+            <Image
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
+              fill
+              src={video.image}
+              alt={video.text}
+            />
+            <h3 className="relative font-semibold md:text-lg">{video.text}</h3>
+            <div className="relative text-sm">
               {video.owner.firstName} {video.owner.lastName}
             </div>
-            <div className="text-xs font-semibold">{video.likes} views</div>
+            <div className="relative text-xs font-semibold">
+              {video.likes} views
+            </div>
           </div>
         ))}
         <button className="bg-primary text-accent border-accent hidden aspect-video w-3/4 flex-none items-center gap-2 rounded-sm border p-8 md:flex md:h-full md:w-full">
