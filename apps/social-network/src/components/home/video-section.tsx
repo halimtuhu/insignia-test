@@ -84,7 +84,7 @@ export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
               <div
                 key={i}
                 className={cn(
-                  'bg-accent text-primary relative flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-1.5 rounded-sm p-3',
+                  'bg-accent text-primary relative flex aspect-video w-3/4 flex-none flex-col items-start justify-end gap-2 rounded-sm p-3',
                   'md:aspect-[4/3] md:h-full md:w-full',
                   'first:md:col-span-2 first:md:row-span-2 first:md:aspect-auto'
                 )}
