@@ -38,6 +38,7 @@ export function PeopleSection({ className }: HTMLAttributes<HTMLDivElement>) {
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
               fill
+              sizes="100%"
               src={people.picture}
               alt={people.firstName}
             />

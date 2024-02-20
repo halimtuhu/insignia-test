@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Modal } from './modal';
 import { IconsUpload } from './icons/icons-upload';
 import { IconsLogOut } from './icons/icons-log-out';
+import Image from 'next/image';
 
 type Props = {
   show: boolean;
@@ -12,7 +13,14 @@ export function ProfileMenu({ show, onClose }: Props) {
   return (
     <Modal show={show} onClose={onClose}>
       <div className="relative flex w-full flex-col items-center">
-        <div className="border-primary bg-accent z-10 aspect-square w-20 rounded-lg border-2"></div>
+        <div className="border-primary bg-accent relative z-10 aspect-square w-20 overflow-hidden rounded-lg border-2">
+          <Image
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="User"
+            fill
+            sizes="100%"
+          />
+        </div>
         <div className="bg-accent text-primary -mt-12 flex w-full flex-col items-stretch rounded-lg pt-16">
           <div className="border-b-primary/25 mx-4 flex flex-col items-center border-b pb-4">
             <h3 className="font-bold">User Name</h3>

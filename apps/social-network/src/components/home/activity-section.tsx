@@ -50,6 +50,7 @@ export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
               src={activity.owner.picture}
               alt={activity.owner.firstName}
               fill
+              sizes="100%"
               className="bg-accent !static block aspect-[6/5] w-full rounded-sm object-cover object-center"
             ></Image>
             <div className="col-span-3">

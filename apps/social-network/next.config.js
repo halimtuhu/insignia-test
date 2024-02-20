@@ -11,6 +11,7 @@ const nextConfig = {
     remotePatterns: [
       { hostname: 'img.dummyapi.io' },
       { hostname: 'randomuser.me' },
+      { hostname: 'images.unsplash.com' },
     ],
   },
   nx: {

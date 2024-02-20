@@ -38,6 +38,7 @@ export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
               fill
+              sizes="100%"
               src={document.image}
               alt={document.text}
             />
