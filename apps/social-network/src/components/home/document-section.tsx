@@ -1,17 +1,23 @@
+'use client';
+
 import Link from 'next/link';
 import { IconsArrow } from '../icons/icons-arrow';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
 import { cn } from '../../helpers/class-helper';
 import { IconsCirclePlus } from '../icons/icons-circle-plus';
+import { PostPreview } from '../../helpers/interfaces';
+import { api } from '../../helpers/api';
+import { getPaginationParams } from '../../helpers/common';
+import Image from 'next/image';
 
 export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
-  const documents = [
-    { title: 'Long Document Title', category: 'Category', views: '22k views' },
-    { title: 'Long Document Title', category: 'Category', views: '22k views' },
-    { title: 'Long Document Title', category: 'Category', views: '22k views' },
-    { title: 'Long Document Title', category: 'Category', views: '22k views' },
-    { title: 'Long Document Title', category: 'Category', views: '22k views' },
-  ];
+  const [documents, setDocuments] = useState<PostPreview[]>([]);
+
+  useEffect(() => {
+    api
+      .getPosts(getPaginationParams(1, 5))
+      .then((res) => setDocuments(res.data));
+  });
 
   return (
     <div className={cn('px-4', className)}>
@@ -27,12 +33,20 @@ export function DocumentSection({ className }: HTMLAttributes<HTMLDivElement>) {
         {documents.map((document, i) => (
           <div
             key={i}
-            className="bg-accent text-primary flex aspect-[5/6] w-[45%] flex-none flex-col items-start justify-end rounded-sm p-3 first:col-span-2 first:row-span-2 md:aspect-[4/3] md:h-full md:w-full"
+            className="bg-accent text-primary relative flex aspect-[5/6] w-[45%] flex-none flex-col items-start justify-end rounded-sm p-3 first:col-span-2 first:row-span-2 md:aspect-[4/3] md:h-full md:w-full"
           >
-            <h3 className="text-sm font-semibold">{document.title}</h3>
-            <div className="text-sm">{document.category}</div>
-            <hr className="bg-primary my-1 h-0.5 w-4" />
-            <div className="text-xs font-semibold">{document.views}</div>
+            <Image
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-25"
+              fill
+              src={document.image}
+              alt={document.text}
+            />
+            <h3 className="relative text-sm font-semibold">{document.text}</h3>
+            <div className="relative text-sm">{document.tags.join(' ')}</div>
+            <hr className="bg-primary relative my-1 h-0.5 w-4" />
+            <div className="relative text-xs font-semibold">
+              {document.likes} views
+            </div>
           </div>
         ))}
         <button className="bg-primary text-accent border-accent hidden aspect-video h-full w-full flex-none items-center gap-2 rounded-sm border p-8 md:flex">
