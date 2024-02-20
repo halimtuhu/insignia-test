@@ -6,60 +6,24 @@ import { IconsChatBubble } from '../icons/icons-chat-bubble';
 import { IconsX } from '../icons/icons-x';
 import { HTMLAttributes, useEffect, useState } from 'react';
 import { cn } from '../../helpers/class-helper';
-import { matchViewport } from '../../helpers/common';
+import { getPaginationParams, matchViewport } from '../../helpers/common';
+import { CommentPreview } from '../../helpers/interfaces';
+import { api } from '../../helpers/api';
+import Image from 'next/image';
 
 export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
-  const [activities, setActivities] = useState<
-    {
-      user: string;
-      status: string;
-      content: string;
-      timestamp: string;
-    }[]
-  >([]);
+  const [activities, setActivities] = useState<CommentPreview[]>([]);
 
   useEffect(() => {
-    const response = [
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-      {
-        user: 'User Name',
-        status: 'commented',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        timestamp: '5 minutes ago',
-      },
-    ];
-
-    if (matchViewport(1024)) setActivities(response.slice(0, 4));
-    else setActivities(response);
+    if (matchViewport(1024)) {
+      api
+        .getComments(getPaginationParams(1, 4))
+        .then((response) => setActivities(response.data));
+    } else {
+      api
+        .getComments(getPaginationParams(1, 6))
+        .then((response) => setActivities(response.data));
+    }
   }, []);
 
   return (
@@ -82,18 +46,25 @@ export function ActivitySection({ className }: HTMLAttributes<HTMLDivElement>) {
               "hover:before:absolute hover:before:right-0 hover:before:top-0 hover:before:h-0 hover:before:w-0 hover:before:border-l-[2.5rem] hover:before:border-t-[2.5rem] hover:before:border-l-transparent hover:before:transition-all hover:before:duration-75 hover:before:ease-in-out hover:before:content-['']"
             )}
           >
-            <div className="bg-accent aspect-[6/5] w-full rounded-sm"></div>
+            <Image
+              src={activity.owner.picture}
+              alt={activity.owner.firstName}
+              fill
+              className="bg-accent !static block aspect-[6/5] w-full rounded-sm object-cover object-center"
+            ></Image>
             <div className="col-span-3">
               <div className="flex items-baseline gap-1">
-                <span className="font-semibold">{activity.user}</span>
-                <span className="text-xs italic">{activity.status}</span>
+                <span className="font-semibold">
+                  {activity.owner.firstName} {activity.owner.lastName}
+                </span>
+                <span className="text-xs italic">commented</span>
               </div>
               <div className="truncate text-sm md:text-base">
-                {activity.content}
+                {activity.message}
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <IconsChatBubble className="h-4 w-4" />
-                <span>{activity.timestamp}</span>
+                <span>{activity.publishDate}</span>
               </div>
               <button className="text-primary absolute right-0 top-0 mr-1 mt-1">
                 <IconsX className="h-4 w-4" />

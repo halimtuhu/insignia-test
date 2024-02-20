@@ -22,3 +22,11 @@ export type PostPreview = {
   publishDate: string;
   owner: UserPreview;
 };
+
+export type CommentPreview = {
+  id: string;
+  message: string;
+  owner: UserPreview;
+  post: string;
+  publishDate: string;
+};

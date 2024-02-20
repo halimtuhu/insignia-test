@@ -8,16 +8,15 @@ import { IconsCircleArrow } from '../icons/icons-circle-arrow';
 import { PostPreview } from '../../helpers/interfaces';
 import { api } from '../../helpers/api';
 import Image from 'next/image';
+import { getPaginationParams } from '../../helpers/common';
 
 export function VideoSection({ className }: HTMLAttributes<HTMLDivElement>) {
   const [videos, setVideos] = useState<PostPreview[]>([]);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams();
-    searchParams.set('page', '1');
-    searchParams.set('limit', '5');
-
-    api.getPosts(searchParams).then((response) => setVideos(response.data));
+    api
+      .getPosts(getPaginationParams(1, 5))
+      .then((response) => setVideos(response.data));
   }, []);
 
   return (

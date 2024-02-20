@@ -8,7 +8,10 @@ const { composePlugins, withNx } = require('@nx/next');
  **/
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: 'img.dummyapi.io' }],
+    remotePatterns: [
+      { hostname: 'img.dummyapi.io' },
+      { hostname: 'randomuser.me' },
+    ],
   },
   nx: {
     // Set this to true if you would like to use SVGR
