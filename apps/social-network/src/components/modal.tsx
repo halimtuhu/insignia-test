@@ -22,7 +22,7 @@ export function Modal({ show, children, onClose }: ModalProps) {
 
   const modal = (
     <Transition appear show={show} as={Fragment}>
-      <div className="fixed inset-0 h-screen w-screen">
+      <div className="fixed inset-0 h-full w-full">
         <TransitionFade>
           <div className="bg-primary/75 absolute inset-0 h-full w-full"></div>
         </TransitionFade>
